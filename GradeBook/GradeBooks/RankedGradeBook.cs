@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace GradeBook.GradeBooks
 {
     public class RankedGradeBook : BaseGradeBook
-
     {
         public RankedGradeBook(string name) : base(name)
         {
             Type = Enums.GradeBookType.Ranked;
             Name = name;
         }
-
-
 
         public override char GetLetterGrade(double averageGrade)
         {
@@ -72,7 +69,6 @@ namespace GradeBook.GradeBooks
             }
 
 
-
         }
         public override void CalculateStatistics()
         {
@@ -83,6 +79,17 @@ namespace GradeBook.GradeBooks
 
             if (Students.Count >= 5)
                 base.CalculateStatistics();
+        }
+
+        public override void CalculateStudentStatistics(string name)
+        {
+            if (Students.Count < 5)
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students.");
+            }
+
+            if (Students.Count >= 5)
+                base.CalculateStudentStatistics(name);
         }
     }
 }
